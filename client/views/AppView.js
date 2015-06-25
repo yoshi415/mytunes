@@ -13,13 +13,29 @@ var AppView = Backbone.View.extend({
     }, this);
 
     this.model.get('songQueue').on('add', function(model){
-    // this.model.on('change:songQueue', function(model){
       var entry = new SongQueueEntryView({model: model});
-      this.$el.append(entry.render())
+      this.$el.find('.queue').append(entry.render());
+      if (this.model.get('songQueue').length === 1) {
+        this.model.get('songQueue').models[0].play();
+      }
     }, this);
 
-    this.model.get('songQueue').on('remove', function(model){
+    this.model.get('songQueue').on('dequeue', function(model){
+      this.$el.find('.entry').first().remove();
+      if (this.model.get('songQueue').length > 0) {
+        this.model.get('songQueue').models[0].play();
+      }
+    }, this);
 
+    this.model.get('songQueue').on('dequeueClicked', function(model){
+      console.log(this.$el.find('.entry'));
+      // model.removeEntry();
+      // model.remove();
+
+      // this.$el.find('.entry').first().remove();
+      // if (this.model.get('songQueue').length > 0) {
+      //   this.model.get('songQueue').models[0].play();
+      // }
     }, this);
   },
 
