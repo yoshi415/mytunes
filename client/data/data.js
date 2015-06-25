@@ -21,3 +21,11 @@ var songData = [
     artist: "Aaliyah",
   }
 ];
+
+var songData1 = [
+  {
+    url: "www.amazon.com",
+    title: "one two three",
+    artist: "me"
+  }
+]
